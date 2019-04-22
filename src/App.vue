@@ -2,12 +2,13 @@
 <div id="app">
   <i v-if='show' @click='show=!show' class="fa fa-pencil-square" title='Edit' aria-hidden="true"></i>
   <i v-if='!show' @click='save' class="fa fa-floppy-o" title='Save' aria-hidden="true"></i>
-  <div v-if='show' id="reading-mode">
+  <transition name="fade" mode="out-in">
+  <div v-if='show' id="reading-mode" key="r">
     <reading :title="title" :author="author" :date="date" :category="category" :theme_color="category_theme_color[category]">
       {{article}}
     </reading>
   </div>
-  <div v-if='!show' id="editing-mode">
+  <div v-if='!show' id="editing-mode" key="e">
     <div :class="{warning: !remain}">
       <label for="">Article title:</label>
       <input class="form-control" type="text" v-model="title" @input="check">
@@ -28,8 +29,8 @@
       <textarea class="form-control" v-model="article" name="" id="" cols="30" rows="10"></textarea>
     </div>
   </div>
+  </transition>
 </div>
-
 </template>
 
 <script>
@@ -154,5 +155,17 @@ export default {
   }
   .warning {
     border: 2px solid red;
+  }
+  .fade-enter {
+    opacity: 0;
+  }
+  .fade-enter-active {
+    transition: all 0.9s;
+  }
+  .fade-leave-active {
+    transition: all 0.9s;
+  }
+  .fade-leave-to {
+    opacity: 0;
   }
 </style>
