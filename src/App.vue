@@ -1,20 +1,16 @@
 <template>
 <div id="app">
-  <input type="text" v-model="text">
-  <h2 :class="red">{{text}}</h2>
+  <ul>
+    <li v-for="(el, key) in text" :key="key"> {{el}}</li>
+  </ul>
 </div>
 
 </template>
 
 <script>
-
+import myMixin from './mixins/test'
 export default {
-  data () {
-    return {
-      text: 'some text',
-      red: 'red'
-    }
-  },
+  mixins: [myMixin],
   computed: {
   },
   methods: {
