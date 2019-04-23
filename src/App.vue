@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <ul>
-    <li v-for="(el, key) in text" :key="key"> {{el}}</li>
+    <li v-for="(el, key) in text" :key="key"> {{el.msg}}</li>
   </ul>
 </div>
 

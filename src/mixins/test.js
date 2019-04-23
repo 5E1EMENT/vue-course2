@@ -1,7 +1,7 @@
 export default {
   data () {
     return {
-      text: [{msg1: 'msg343'}, {msg2: 'msg23'}, {msg3: 'msg3234'}]
+      text: [{msg: 'msg343'}, {msg: 'msg23'}, {msg: 'msg3234'}]
     }
   }
 }
