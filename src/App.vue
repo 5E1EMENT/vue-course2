@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <input type="text" v-model="text">
-  <h2 :class="red">{{text}}</h2>
+  <h2 :class="red" v-test:argument.modifier="text">{{text}}</h2>
 </div>
 
 </template>
