@@ -6,8 +6,14 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 Vue.config.productionTip = false
 
+Vue.component('com', {
+  render: (h) => {
+    var p1 = h('p', { attrs: { title: 'the first P' } }, 'text1')
+    var p2 = h('p', 'text2')
+    return h('div', [p1, p2])
+  }
+})
 /* eslint-disable no-new */
-export const bus = new Vue()
 
 new Vue({
   el: '#app',
