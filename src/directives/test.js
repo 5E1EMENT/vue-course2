@@ -1,5 +1,5 @@
 export default {
-  bind (el) {
+  bind (el, bindings, vnode) {
     console.log(el.parentNode)
   },
   inserted (el) {
