@@ -1,14 +1,14 @@
 <?php
 
 if(!empty($_POST['range'])){
-    if($_POST['range']=='all'){;
-        $db = mysqli_connect('localhost', 'root', '', 'car');
+    if($_POST['range']=='all'){
+        $db = @new MySQLi('localhost','root','','car');
         if($db->connect_error){
             exit(json_encode([false,$db->connect_error]));
         }
         $sql = "SELECT `car_id`, `brand`, `model` FROM `cars`";
         //$sql = "SELECT `car_id`, `brand`, `model` FROM `car` WHERE `brand`='Ferrari'";
-        $result = mysqli_query($db, $sql);
+        $result = $db->query($sql);
         if($result){
             // check num_rows
             if($result->num_rows == 0){
