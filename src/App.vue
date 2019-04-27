@@ -14,10 +14,10 @@
 
 <script>
 
+import $ from 'jquery'
 export default {
   data () {
     return {
-      ajax: null,
       car_info_set: [],
       err_msg: 'sorry, no car in record',
       src: require('./logo.png'),
@@ -27,30 +27,33 @@ export default {
   computed: {},
   components: {},
   created () {
-    this.ajax = new XMLHttpRequest()
-    this.request()
+    this.jq_request_response()
   },
   methods: {
-    request () {
-      this.ajax.onreadystatechange = this.response
-      this.ajax.open('POST', this.url, true)
-      this.ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-      this.ajax.send('range=all')
-    },
-    response () {
-      if (this.ajax.readyState === 4) {
-        if (this.ajax.status === 200) {
-          this.car_info_set = '' // update vue data
-          let result = JSON.parse(this.ajax.responseText)
-          if (result[0]) {
-            this.car_info_set = result[1]
-          } else {
-            this.err_msg = result[1]
-          }
+    jq_request_response () {
+      let that = this
+      $.ajax({
+        url: that.url,
+        method: 'POST',
+        data: {
+          range: 'all'
         }
-      }
+      }).always(() => {
+        that.car_info_set = []
+        that.err_msg = ''
+      })
+        .done((data) => {
+          let result = JSON.parse(data)
+          if (result[0]) {
+            that.car_info_set = result[1]
+          } else {
+            that.err_msg = result[1]
+          }
+        })
+        .fail((data) => {
+          that.err_msg = data.statusText
+        })
     }
-
   }
 }
 </script>
