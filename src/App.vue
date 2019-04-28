@@ -4,6 +4,8 @@
     <li v-for="(element, key) in car_info_set" :key="key">
       brand is <b>{{element.brand}}</b>
       model is <b>{{element.model}}</b>
+      <button class="btn btn-danger" id="delete_item" @click="delete_item(element.car_id)">Delete</button>
+      <button class="btn btn-primary" id="edit_item">Edit</button>
     </li>
   </ul>
   <div v-else class="err_list"> {{err_msg}} </div>
@@ -27,16 +29,16 @@ export default {
   computed: {},
   components: {},
   created () {
-    this.jq_request_response()
+    this.retrieve_all()
   },
   methods: {
-    jq_request_response () {
+    retrieve_all () {
       let that = this
       $.ajax({
         url: that.url,
         method: 'POST',
         data: {
-          range: 'all'
+          action: 'retrieve_all'
         }
       }).always(() => {
         that.car_info_set = []
@@ -46,6 +48,31 @@ export default {
           let result = JSON.parse(data)
           if (result[0]) {
             that.car_info_set = result[1]
+          } else {
+            that.err_msg = result[1]
+          }
+        })
+        .fail((data) => {
+          that.err_msg = data.statusText
+        })
+    },
+    delete_item (carId) {
+      let that = this
+      $.post({
+        url: that.url,
+        data: {
+          action: 'delete_item',
+          car_id: carId
+        }
+      })
+        .always(() => {
+          that.car_info_set = []
+          that.err_msg = ''
+        })
+        .done((data) => {
+          let result = JSON.parse(data)
+          if (result[0]) {
+            that.retrieve_all()
           } else {
             that.err_msg = result[1]
           }
@@ -68,6 +95,8 @@ export default {
   li {
     background-color: green;
     color: white;
+    display: flex;
+    justify-content: space-evenly;
   }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
