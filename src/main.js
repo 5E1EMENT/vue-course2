@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import 'font-awesome/css/font-awesome.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap'
 
 Vue.config.productionTip = false
 

@@ -66,7 +66,7 @@ if(!empty($_POST['action'])){
                         $engine = "Hybrid";
                         break;
                     case 5:
-                        $engine = "Hydrigen";
+                        $engine = "Hydrogen";
                         break;
                     default:
                         $engine = false;
@@ -95,6 +95,36 @@ if(!empty($_POST['action'])){
             }
         }else{
             echo json_encode([false,'no data sent, cannot create new row...']);
+        }
+        $db->close();
+    }
+    else if ($_POST['action']=='update_item') {
+        //Update table row here
+        if(!empty($_POST['edited_item'])){
+            if(!empty($_POST['edited_item']['car_id'])&&!empty($_POST['edited_item']['brand'])&&!empty($_POST['edited_item']['model'])&&!empty($_POST['edited_item']['engine'])&&!empty($_POST['edited_item']['gear_box'])){
+                // check brand, model, engine and gearbox
+                // translate engine and gearbox code...
+                $car_id = $db->real_escape_string($_POST['edited_item']['car_id']);
+                $brand = $db->real_escape_string($_POST['edited_item']['brand']);
+                $model = $db->real_escape_string($_POST['edited_item']['model']);
+                $engine = $db->real_escape_string($_POST['edited_item']['engine']);
+                $gearbox = $db->real_escape_string($_POST['edited_item']['gear_box']);
+
+                    $sql = "UPDATE `cars` SET `brand`='{$brand}', `model`='{$model}', `engine`='{$engine}', `gear_box`='{$gearbox}' WHERE `car_id`='{$car_id}'";
+                    $result = $db->query($sql);
+                    if($result){
+                        echo json_encode([true,'new row updated successful']);
+                    }else{
+                        echo json_encode([false,'SQL Error']);
+                    }
+
+
+            }
+            else{
+                echo json_encode([false,'insufficient data, cannot update new row...']);
+            }
+        }else{
+            echo json_encode([false,'no data sent, cannot update new row...']);
         }
         $db->close();
     }
