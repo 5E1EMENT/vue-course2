@@ -2,8 +2,14 @@
   <div>
     <h1>HELLO FROM ONE</h1>
     <ul>
-      <li v-for="(item, index) in product_list" :key="index">Product:{{item.product}} / Price: {{item.price}}</li>
+      <li v-for="(item, index) in product_list" :key="index">
+        Product:{{item.product}} / Price: {{item.price}}
+        <button>Up</button>
+        <button>Down</button>
+      </li>
     </ul>
+    <button @click="edit_all_price(true)">All Up</button>
+    <button @click="edit_all_price(false)">All Down</button>
   </div>
 </template>
 
@@ -12,12 +18,18 @@ import {mapState} from 'vuex'
 export default {
   data () {
     return {
+      margin: 0.5
     }
   },
   computed: {
     ...mapState([
       'product_list'
     ])
+  },
+  methods: {
+    edit_all_price (direction) {
+      this.$store.commit('mutate_all_price', [direction, this.margin])
+    }
   }
 }
 </script>

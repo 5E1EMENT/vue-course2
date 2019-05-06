@@ -21,7 +21,19 @@ const store = {
       })
     }
   },
-  mutations: {},
+  mutations: {
+    mutate_all_price (state, argument) {
+      if (argument[0]) {
+        state.product_list.forEach(item => {
+          item.price += argument[1]
+        })
+      } else {
+        state.product_list.forEach(item => {
+          item.price -= argument[1]
+        })
+      }
+    }
+  },
   actions: {}
 }
 export default new vuex.Store(store)
