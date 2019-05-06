@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import first from '@/components/first'
-import second from '@/components/second'
-
+const first = () => import('@/components/first')
+const second = () => import('@/components/second')
 Vue.use(VueRouter)
 const routes = [
   {
