@@ -4,6 +4,7 @@
   <h2 :class="red">{{text}}</h2>
 
   <router-view></router-view>
+  <router-view name="child"></router-view>
   <router-link :to="{name: 'first', params:{msg:'HELLO'}}"><button class="btn btn-dark">1</button></router-link>
   <router-link :to="{name: 'second'}"><button class="btn btn-dark">2</button></router-link>
 </div>

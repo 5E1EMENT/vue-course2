@@ -18,14 +18,11 @@ const routes = [
   {
     name: 'first',
     path: '/component_first/:msg',
-    component: first,
-    children: [
-      {
-        path: 'child',
-        component: child
+    components: {
+      default: first,
+      child
+    }
 
-      }
-    ]
   },
   {
     name: 'second',
