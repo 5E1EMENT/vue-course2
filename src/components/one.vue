@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions, mapMutations} from 'vuex'
 export default {
   data () {
     return {
@@ -27,11 +27,19 @@ export default {
     ])
   },
   methods: {
+    ...mapMutations([
+      'mutate_all_price'
+    ]),
+    ...mapActions([
+      'action_each_price'
+    ]),
     edit_each_price (direction, item) {
-      this.$store.dispatch('action_each_price', [direction, this.margin, item])
+      this.action_each_price([direction, this.margin, item])
+      // this.$store.dispatch('action_each_price', [direction, this.margin, item])
     },
     edit_all_price (direction) {
-      this.$store.commit('mutate_all_price', [direction, this.margin])
+      this.mutate_all_price([direction, this.margin])
+      // this.$store.commit('mutate_all_price', [direction, this.margin])
     }
   }
 }
