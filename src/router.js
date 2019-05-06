@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 const first = () => import('@/components/first')
 const second = () => import('@/components/second')
+const child = () => import('@/components/child')
 Vue.use(VueRouter)
 const routes = [
   {
@@ -17,7 +18,14 @@ const routes = [
   {
     name: 'first',
     path: '/component_first/:msg',
-    component: first
+    component: first,
+    children: [
+      {
+        path: 'child',
+        component: child
+
+      }
+    ]
   },
   {
     name: 'second',

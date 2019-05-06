@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-view></router-view>
     <h2>{{msg}}</h2>
   </div>
 </template>
@@ -16,6 +17,10 @@ export default {
 </script>
 
 <style scoped>
+  div{
+    background-color: black;
+    padding: 10px ;
+  }
   h2 {
     padding: 20px;
     background-color: red;
