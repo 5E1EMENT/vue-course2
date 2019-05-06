@@ -1,13 +1,14 @@
 <template>
 <div id="app">
-  <input type="text" v-model="text">
-  <h2 :class="red">{{text}}</h2>
+  <one></one>
+  <two></two>
 </div>
 
 </template>
 
 <script>
-
+import one from './components/one'
+import two from './components/two'
 export default {
   data () {
     return {
@@ -16,10 +17,12 @@ export default {
     }
   },
   computed: {
+
   },
   methods: {
   },
   components: {
+    one, two
   }
 
 }
