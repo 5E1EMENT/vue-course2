@@ -4,8 +4,8 @@
     <ul>
       <li v-for="(item, index) in product_list" :key="index">
         Product:{{item.product}} / Price: {{item.price}}
-        <button>Up</button>
-        <button>Down</button>
+        <button @click="edit_each_price(true, item)">Up</button>
+        <button @click="edit_each_price(false, item)">Down</button>
       </li>
     </ul>
     <button @click="edit_all_price(true)">All Up</button>
@@ -27,6 +27,9 @@ export default {
     ])
   },
   methods: {
+    edit_each_price (direction, item) {
+      this.$store.dispatch('action_each_price', [direction, this.margin, item])
+    },
     edit_all_price (direction) {
       this.$store.commit('mutate_all_price', [direction, this.margin])
     }

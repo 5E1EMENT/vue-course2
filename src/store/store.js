@@ -22,6 +22,13 @@ const store = {
     }
   },
   mutations: {
+    mutate_each_price (state, argument) {
+      if (argument[0]) {
+        argument[2].price += argument[1]
+      } else {
+        argument[2].price -= argument[1]
+      }
+    },
     mutate_all_price (state, argument) {
       if (argument[0]) {
         state.product_list.forEach(item => {
@@ -34,6 +41,12 @@ const store = {
       }
     }
   },
-  actions: {}
+  actions: {
+    action_each_price (context, argument) {
+      setTimeout(function () {
+        context.commit('mutate_each_price', argument)
+      }, 1000)
+    }
+  }
 }
 export default new vuex.Store(store)
