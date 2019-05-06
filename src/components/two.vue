@@ -2,14 +2,21 @@
   <div>
     <h1>HELLO FROM TWO</h1>
     <ul>
-      <li v-for="(item, index) in $store.getters.sale_product_list" :key="index">Product :{{item.product}} / Sale Price: {{item.price}}</li>
+      <li v-for="(item, index) in sale_product_list" :key="index">Product :{{item.product}} / Sale Price: {{item.price}}</li>
     </ul>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
-  name: 'two'
+  name: 'two',
+  computed: {
+    // sale_product_list () {return this.$store.getters.sale_product_list}
+    ...mapGetters([
+      'sale_product_list'
+    ])
+  }
 }
 </script>
 

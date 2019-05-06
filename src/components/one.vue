@@ -2,21 +2,22 @@
   <div>
     <h1>HELLO FROM ONE</h1>
     <ul>
-      <li v-for="(item, index) in list" :key="index">Product:{{item.product}} / Price: {{item.price}}</li>
+      <li v-for="(item, index) in product_list" :key="index">Product:{{item.product}} / Price: {{item.price}}</li>
     </ul>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   data () {
     return {
     }
   },
   computed: {
-    list: function () {
-      return this.$store.state.product_list
-    }
+    ...mapState([
+      'product_list'
+    ])
   }
 }
 </script>
