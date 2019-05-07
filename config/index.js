@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       "/backend":{
-        target: "http://php-server/server.php",
+        target: "http://php-server/",
         changeOrigin: true,
         secure: false,
         pathRewrite:{
