@@ -4,6 +4,7 @@
   <h2 :class="red">{{text}}</h2>
   <button @click="trigger_get()">Axios GET</button>
   <button @click="trigger_post()">Axios POST</button>
+  <button @click="trigger_both()">Axios BOTH</button>
 </div>
 
 </template>
@@ -23,6 +24,24 @@ export default {
   computed: {
   },
   methods: {
+    trigger_both () {
+      function send_msg () {
+        return axios.post('/backend/server.php', qs.stringify({msg: 'Message from POST'}))
+      }
+      function send_author () {
+        return axios.get('/backend/server.php', {params: {author: 'mee'}})
+      }
+
+      axios.all([send_msg(), send_author()])
+        .then(
+          axios.spread((msg, author) => {
+            console.log(msg, author)
+          })
+        )
+        .catch(err => {
+          console.log(err)
+        })
+    },
     trigger_post () {
       axios.post(this.url, qs.stringify({
         msg: 'sent by POST method'
