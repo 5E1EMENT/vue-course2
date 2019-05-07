@@ -18,7 +18,7 @@ export default {
     return {
       text: 'some text',
       red: 'red',
-      url: '/backend/server.php'
+      url: '/backend'
     }
   },
   computed: {
@@ -50,7 +50,19 @@ export default {
           console.log(response)
         })
         .catch(error => {
-          console.log(error)
+          if (error.response) {
+            // successful request + response
+            console.log('successful request + response')
+            console.log(error.response)
+          } else if (error.request) {
+            // successful request BUT NO response recieved
+            console.log('successful request BUT NO response recieved')
+            console.log(error.request)
+          } else {
+            // no request sent out...
+            console.log('no request sent out')
+            console.log(error.message)
+          }
         })
     },
     trigger_get () {
