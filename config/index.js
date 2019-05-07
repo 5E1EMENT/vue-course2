@@ -11,10 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      "/api/*":{
+      "/backend":{
         target: "http://php-server/server.php",
         changeOrigin: true,
-        secure: false
+        secure: false,
+        pathRewrite:{
+          "/backend": "http://php-server"
+        }
       }
     },
 

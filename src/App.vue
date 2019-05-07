@@ -17,7 +17,7 @@ export default {
     return {
       text: 'some text',
       red: 'red',
-      url: '/api/php-server/server.php'
+      url: '/backend/server.php'
     }
   },
   computed: {
